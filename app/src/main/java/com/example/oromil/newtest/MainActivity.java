@@ -1,9 +1,11 @@
 package com.example.oromil.newtest;
 
+import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -25,8 +27,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         Fragment2 fragment2 = (Fragment2) getFragmentManager().findFragmentById(R.id.fragment2);
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
+        swipe.setProgressBackgroundColorSchemeResource(R.color.myColor);
+        swipe.setColorSchemeResources(R.color.myColor);
 
-        ServerManager.init();
+        //ServerManager.init();
+
 
         dm = new DataManager(this, fragment1.list, fragment2.editText, progressBar);
         dm.save();
@@ -36,8 +41,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
-        swipe.setRefreshing(true);
-        dm.save();
         swipe.setRefreshing(false);
+        dm.save();
+//        swipe.setRefreshing(false);
     }
 }
